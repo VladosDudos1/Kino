@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    tools:context=".GenreActivity">
+
+    <LinearLayout
+        android:id="@+id/sc_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/fColor"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="Выбирите ваши любимые жанры"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:clipToPadding="true"
+            android:nestedScrollingEnabled="false" />
+
+        <ProgressBar
+            android:id="@+id/pb_g"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:indeterminateTint="@color/white" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/podtverdit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/bluePirple"
+            android:text="Подтвердить"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:cornerRadius="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/purple" />
+    </LinearLayout>
+
+</ScrollView>
