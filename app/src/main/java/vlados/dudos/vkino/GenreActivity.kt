@@ -14,9 +14,6 @@ import vlados.dudos.vkino.app.App
 import vlados.dudos.vkino.models.Genre
 
 class GenreActivity : AppCompatActivity(), GenreAdapter.OnClickListener {
-
-
-
     override fun click(data: Genre) {
 
     }
@@ -26,8 +23,7 @@ class GenreActivity : AppCompatActivity(), GenreAdapter.OnClickListener {
         setContentView(R.layout.activity_genre)
 
         podtverdit_btn.setOnClickListener {
-            App.dm.endFirstLaunch()
-            startActivity(Intent(this, ListMovieActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         rv.layoutManager = GridLayoutManager(this, 3)

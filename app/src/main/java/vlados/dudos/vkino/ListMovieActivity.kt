@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -78,14 +79,17 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
                 rv_search.adapter =
                     SearchAdapter(s.results, this)
             }, {
-                Toast.makeText(this, "Ups...", Toast.LENGTH_SHORT).show()
             })
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_movie)
+
+        text_language.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
 
 
@@ -97,13 +101,23 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
             false
         }
 
-        val sharedPreferences = getSharedPreferences("autorisation", Context.MODE_PRIVATE)
 
-        val name = sharedPreferences.getString("name", null)
-        val surname = sharedPreferences.getString("surname", null)
+        var name = ""
+        val sharedPreferencesToken = getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = sharedPreferencesToken.getString("token", "")
 
-        text_language.text =
-            name!!.first().toString().capitalize() + surname!!.first().toString().capitalize()
+        val getUser = App.dm.apiReg
+            .getProfile(token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ u ->
+                name = u.content.nickName
+            }, {
+                it.message
+            }, {
+                text_language.text = name[0].toString().capitalize() + name[1].toString()
+            })
+
 
         ViewAnimator().topAnimate(anim_layout, 600, true, true)
         edit_search.addTextChangedListener(this)
@@ -157,6 +171,12 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
             })
 
         arrowback.setOnClickListener {
+            edit_search.text.clear()
+            val view = this.currentFocus
+            if (view != null) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
             arrowback.visibility = View.GONE
             rv_search.visibility = View.GONE
             card_initials.visibility = View.VISIBLE
@@ -166,6 +186,11 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
 
     override fun onBackPressed() {
         super.onBackPressed()
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
         arrowback.visibility = View.GONE
         rv_search.visibility = View.GONE
         card_initials.visibility = View.VISIBLE

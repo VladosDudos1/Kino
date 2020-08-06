@@ -29,23 +29,62 @@
                     android:layout_height="wrap_content">
 
                     <com.github.florent37.shapeofview.shapes.RoundRectView
+                        android:id="@+id/vp_holder"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
                         android:layout_marginBottom="24dp"
                         app:shape_roundRect_bottomLeftRadius="36dp"
                         app:shape_roundRect_bottomRightRadius="36dp">
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/img_info"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:scaleType="centerCrop"-->
-<!--                            android:src="@drawable/batman" />-->
+                        <ImageView
+                            android:id="@+id/img_vp_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/noimage"
+                            android:visibility="gone"/>
 
                         <androidx.viewpager.widget.ViewPager
                             android:id="@+id/vp_info"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_next"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginStart="48dp"
+                            android:layout_gravity="center|bottom"
+                            app:cardBackgroundColor="@color/bluePirple">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_play_arrow"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_back"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:visibility="gone"
+                            app:cardCornerRadius="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginEnd="48dp"
+                            android:layout_gravity="center|bottom"
+                            app:cardBackgroundColor="@color/bluePirple">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:rotation="180"
+                                android:src="@drawable/ic_play_arrow"/>
+
+                        </androidx.cardview.widget.CardView>
 
                     </com.github.florent37.shapeofview.shapes.RoundRectView>
 
@@ -208,20 +247,7 @@
 
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/youtube_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@color/purple">
 
-        <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/youtube_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-    </FrameLayout>
 
 
     <ImageView

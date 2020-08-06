@@ -8,8 +8,9 @@ class DataManager {
     private val baseContext: Context
 
     val api = Api.createApi()
+    val apiReg = ApiReg.createApi()
 
-    constructor(baseContext: Context){
+    constructor(baseContext: Context) {
         this.baseContext = baseContext
         shared = baseContext.getSharedPreferences("WS", Context.MODE_PRIVATE)
     }
@@ -17,4 +18,6 @@ class DataManager {
     fun isFirstLaunch(): Boolean = shared.getBoolean("isFirstLaunch", true)
 
     fun endFirstLaunch(): Boolean = shared.edit().putBoolean("isFirstLaunch", false).commit()
+
+    fun logout(): Boolean = shared.edit().putBoolean("isFirstLaunch", true).commit()
 }

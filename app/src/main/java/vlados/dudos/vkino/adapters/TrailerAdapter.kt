@@ -12,7 +12,6 @@ import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_info.*
 import kotlinx.android.synthetic.main.trailer_view.view.*
 import vlados.dudos.vkino.Case
-import vlados.dudos.vkino.Case.video_key
 import vlados.dudos.vkino.InfoActivity
 import vlados.dudos.vkino.R
 import vlados.dudos.vkino.models.ResultX

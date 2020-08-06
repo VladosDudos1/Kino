@@ -1,14 +1,12 @@
 package vlados.dudos.vkino
 
-import vlados.dudos.vkino.models.ItemModel
-import vlados.dudos.vkino.models.Result
+import vlados.dudos.vkino.models.*
 
 object Case {
 
     var item: Result? = null
     var itemFull: ItemModel? = null
 
-    var video_key = ""
     var id: Int? = null
 
     var filterId: Int ?= null
@@ -17,4 +15,5 @@ object Case {
     val googleKey = "AIzaSyC0nAQI3hBdEAGoRz5mNfNy3FaKL77bdiE"
     var key = ""
 
+    var userToken = ""
 }
