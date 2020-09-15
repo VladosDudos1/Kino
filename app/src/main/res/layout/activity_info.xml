@@ -15,6 +15,7 @@
         android:visibility="visible">
 
         <ScrollView
+            android:id="@+id/scroll_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -41,28 +42,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/noimage"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
                         <androidx.viewpager.widget.ViewPager
                             android:id="@+id/vp_info"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent" />
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_next"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:cardCornerRadius="8dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginStart="48dp"
                             android:layout_gravity="center|bottom"
-                            app:cardBackgroundColor="@color/bluePirple">
+                            android:layout_marginStart="48dp"
+                            android:layout_marginBottom="12dp"
+                            app:cardBackgroundColor="@color/bluePirple"
+                            app:cardCornerRadius="8dp">
 
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_play_arrow"/>
+                                android:src="@drawable/ic_play_arrow" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -70,19 +71,19 @@
                             android:id="@+id/card_back"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:visibility="gone"
-                            app:cardCornerRadius="8dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginEnd="48dp"
                             android:layout_gravity="center|bottom"
-                            app:cardBackgroundColor="@color/bluePirple">
+                            android:layout_marginEnd="48dp"
+                            android:layout_marginBottom="12dp"
+                            android:visibility="gone"
+                            app:cardBackgroundColor="@color/bluePirple"
+                            app:cardCornerRadius="8dp">
 
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
                                 android:rotation="180"
-                                android:src="@drawable/ic_play_arrow"/>
+                                android:src="@drawable/ic_play_arrow" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -156,38 +157,42 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
 
-                    <TextView
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp_cast"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:gravity="left"
-                        android:text="Описание"
-                        android:textColor="@color/white"
-                        android:textSize="28sp" />
-
-                    <TextView
-                        android:id="@+id/plot"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginBottom="24dp"
-                        android:gravity="left"
-                        android:text="American car designer Carroll Shelby and driver Kn Miles battle corporate interference and the laws of physics to build a revolutionary race car for Ford in order."
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
 
 
-                </LinearLayout>
+                    <ImageView
+                        android:id="@+id/toActor_btn"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="32dp"
+                        android:src="@drawable/actors"
+                        android:tint="@color/pb" />
 
+
+                    <ImageView
+                        android:id="@+id/toPlot_btn"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_baseline_short_text_24"
+                        android:tint="@color/pb"
+                        android:visibility="gone" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/text_trailer"
@@ -242,12 +247,11 @@
             android:backgroundTint="#6667BC"
             android:text="Смотреть"
             android:textAllCaps="false"
+            android:textColor="@color/allTimeWhite"
             android:textSize="20sp"
             app:cornerRadius="16dp" />
 
     </FrameLayout>
-
-
 
 
     <ImageView
@@ -256,5 +260,56 @@
         android:layout_height="32dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_arrow_back_black_24dp" />
+
+    <ImageView
+        android:id="@+id/rate"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_star" />
+
+
+    <LinearLayout
+        android:id="@+id/info_layout"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/allTimeWhite"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:background="@drawable/layout_shape"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_rate"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardBackgroundColor="@color/init_bg"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="16dp">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_baseline_rate_review_24" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/rate_text"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Rate: 0/10"
+            android:textSize="14sp"
+            android:textColor="@color/allTimeBlack"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -14,14 +14,14 @@ import vlados.dudos.vkino.models.UserProfile
 
 interface ApiReg {
 
+    @GET("user/profile")
+    fun getProfile(@Header("Token") accountToken: String?): Observable<UserProfile>
+
     @POST("users")
-    fun registration(@Body user: User) : Observable<User>
+    fun registration(@Body user: User): Observable<User>
 
     @POST("user/login")
     fun autorisation(@Body user: User): Observable<User>
-
-    @GET("user/profile")
-    fun getProfile(@Header("Token") accountToken: String?): Observable<UserProfile>
 
     companion object {
         fun createApi(): ApiReg {

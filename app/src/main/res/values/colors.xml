@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2A2243</color>
-    <color name="colorPrimaryDark">#2A2243</color>
+    <color name="colorPrimary">#DDD</color>
+    <color name="colorPrimaryDark">#60568F</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="purple">#2A2243</color>
-    <color name="black">#070215</color>
+    <color name="purple">#FAFAFA</color>
+    <color name="init_bg">#60568F</color>
+    <color name="black">#FFF</color>
     <color name="greyBlue">#999FD4</color>
     <color name="blue">#7992D2</color>
     <color name="strange">#3F355C</color>
     <color name="pinkWhite">#C7BDDF</color>
     <color name="bluePirple">#6667BC</color>
-    <color name="white">#FFF</color>
+    <color name="white">#000</color>
     <color name="fColor">#40365F</color>
-    <color name="grey">#999</color>
-    <color name="whiteGrey">#DDD</color>
+    <color name="grey">#2A2243</color>
+    <color name="search_hint">#999</color>
+    <color name="whiteGrey">#202020</color>
     <color name="green">#84FF59</color>
-    
+    <color name="allTimeWhite">#FFF</color>
+    <color name="pb">#60568F</color>
+    <color name="log_lay_color">#60568F</color>
     <color name="purpleTransparent">#CC2A2243</color>
-
+    <color name="allTimeWhiteGrey">#DDD</color>
     <color name="red">#FF0000</color>
-
     <color name="bitWhite">#E6FFFFFF</color>
+    <color name="pink">#FF507E</color>
+    <color name="shimmerColor">#DDDDDD</color>
+    <color name="allTimeGrey">#AAA</color>
 
+    <color name="allTimeBlack">#000</color>
+
+    <color name="redSec">#E7625C</color>
+    <color name="orange">#F3C066</color>
+    <color name="background">#000000</color>
+    <color name="digital_text">#ffffff</color>
 </resources>

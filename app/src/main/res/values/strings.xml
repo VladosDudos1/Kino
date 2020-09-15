@@ -2,5 +2,8 @@
     <string name="app_name">V Kino</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="movies_with_cast">Фильмы с участием этого актёра:</string>
+    <string name="message">Watch face tapped</string>
+    <string name="my_digital_name">My Digital</string>
 
 </resources>

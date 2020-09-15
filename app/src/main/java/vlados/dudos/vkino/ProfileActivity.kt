@@ -21,6 +21,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        themeSwitch.isChecked = App.dm.isDayMode()
 
         val disp = App.dm.apiReg
             .getProfile(userToken)
@@ -43,11 +44,12 @@ class ProfileActivity : AppCompatActivity() {
 
         themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            } else {
+                App.dm.toNightMode()
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                App.dm.toDayMode()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-
     }
 }

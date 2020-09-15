@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/f_tC"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp">
+
+            <com.github.florent37.shapeofview.shapes.RoundRectView
+                android:id="@+id/card_coming"
+                android:layout_width="220dp"
+                android:layout_height="340dp"
+                android:layout_marginEnd="12dp"
+                app:shape_roundRect_bottomLeftRadius="24dp"
+                app:shape_roundRect_bottomRightRadius="24dp"
+                app:shape_roundRect_topLeftRadius="24dp"
+                app:shape_roundRect_topRightRadius="24dp">
+
+                <ImageView
+                    android:id="@+id/img_coming"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+
+            </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+            <com.github.florent37.shapeofview.shapes.RoundRectView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="32dp"
+                app:shape_roundRect_bottomLeftRadius="8dp"
+                app:shape_roundRect_bottomRightRadius="8dp"
+                app:shape_roundRect_topLeftRadius="8dp"
+                app:shape_roundRect_topRightRadius="8dp">
+
+                <TextView
+                    android:id="@+id/rate_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rate_gradient"
+                    android:gravity="center"
+                    android:text="9,2"
+                    android:textColor="@color/allTimeWhite"
+                    android:textSize="20sp" />
+            </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/movie_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_marginTop="4dp"
+            android:lines="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</FrameLayout>

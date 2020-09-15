@@ -1,15 +1,19 @@
 package vlados.dudos.vkino
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -25,14 +29,11 @@ import vlados.dudos.vkino.models.Genre
 import vlados.dudos.vkino.models.Result
 import java.util.*
 
-class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClickListener,
-    MovieAdapter.OnClickListener, FilterAdapter.OnClickListener, NewsAdapter.OnClickListener {
+
+class ListMovieActivity : AppCompatActivity(), TextWatcher,
+    MovieAdapter.OnClickListener, FilterAdapter.OnClickListener {
 
     override fun clickM(data: Result) {
-        startActivity(Intent(this, InfoActivity::class.java))
-    }
-
-    override fun click(data: Result) {
         startActivity(Intent(this, InfoActivity::class.java))
     }
 
@@ -44,20 +45,24 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
     }
 
     override fun click(data: Genre) {
-        filterList.clear()
-        for (i in listM) {
-            for (j in i.genre_ids) {
-                if (j == filterId) {
-                    filterList.add(i)
+        if (filterId == -1) {
+            filterList = listM.toMutableList()
+        } else {
+            filterList.clear()
+            for (i in listM) {
+                for (j in i.genre_ids) {
+                    if (j == filterId) {
+                        filterList.add(i)
+                    }
                 }
             }
         }
-        rv_movie.adapter = MovieAdapter(filterList, listF, this)
+        rv_movie.adapter = MovieAdapter(filterList, listF, this, applicationContext)
     }
 
 
     var listN = listOf<Result>()
-    var listF = listOf<Genre>()
+    var listF = mutableListOf<Genre>()
     var listM = listOf<Result>()
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -76,10 +81,8 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
                         }
                     }
                 }
-                rv_search.adapter =
-                    SearchAdapter(s.results, this)
-            }, {
-            })
+                rv_search.adapter = SearchAdapter(s.results, this)
+            }, {}, { rv_search.visibility = View.VISIBLE })
     }
 
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
@@ -90,17 +93,6 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
         text_language.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
-
-
-
-        edit_search.setOnTouchListener { view, motionEvent ->
-            arrowback.visibility = View.VISIBLE
-            card_initials.visibility = View.GONE
-            anim_layout.visibility = View.GONE
-            rv_search.visibility = View.VISIBLE
-            false
-        }
-
 
         var name = ""
         val sharedPreferencesToken = getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -113,7 +105,7 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
             .subscribe({ u ->
                 name = u.content.nickName
             }, {
-                it.message
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             }, {
                 text_language.text = name[0].toString().capitalize() + name[1].toString()
             })
@@ -150,50 +142,36 @@ class ListMovieActivity : AppCompatActivity(), TextWatcher, SearchAdapter.OnClic
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({ g ->
                                 pb_n.visibility = View.GONE
+                                g.genres.add(0, Genre(0, "", true))
                                 listF = g.genres
+
                             }, {
                                 Toast.makeText(this, "genres problem", Toast.LENGTH_SHORT).show()
                             }, {
                                 rv_new.adapter =
                                     NewsAdapter(listN, this)
                                 rv_filter.adapter =
-                                    FilterAdapter(listF, this)
+                                    FilterAdapter(listF, this, applicationContext)
 
                                 rv_movie.adapter =
-                                    MovieAdapter(listM, listF, this)
+                                    MovieAdapter(listM, listF, this, applicationContext)
 
                                 pb_n.visibility = View.GONE
                                 rv_new.visibility = View.VISIBLE
-                                rv_filter.visibility = View.VISIBLE
                                 rv_movie.visibility = View.VISIBLE
+                                rv_filter.visibility = View.VISIBLE
                             })
                     })
             })
-
-        arrowback.setOnClickListener {
-            edit_search.text.clear()
-            val view = this.currentFocus
-            if (view != null) {
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view.windowToken, 0)
-            }
-            arrowback.visibility = View.GONE
-            rv_search.visibility = View.GONE
-            card_initials.visibility = View.VISIBLE
-            anim_layout.visibility = View.VISIBLE
-        }
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        val view = this.currentFocus
-        if (view != null) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        if (rv_search.visibility == View.VISIBLE) {
+            rv_search.visibility = View.GONE
+            edit_search.text.clear()
+            edit_search.clearFocus()
+        } else {
+            super.onBackPressed()
         }
-        arrowback.visibility = View.GONE
-        rv_search.visibility = View.GONE
-        card_initials.visibility = View.VISIBLE
-        anim_layout.visibility = View.VISIBLE
     }
 }

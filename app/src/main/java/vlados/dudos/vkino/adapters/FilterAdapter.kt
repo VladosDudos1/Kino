@@ -1,5 +1,6 @@
 package vlados.dudos.vkino.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +10,11 @@ import vlados.dudos.vkino.Case.filterId
 import vlados.dudos.vkino.R
 import vlados.dudos.vkino.models.Genre
 
-class FilterAdapter(val list: List<Genre>, val onClickListaner: OnClickListener) :
+class FilterAdapter(val list: MutableList<Genre>, val onClickListaner: OnClickListener, val context: Context) :
     RecyclerView.Adapter<FilterAdapter.FilterView>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterView {
-        return FilterView(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.filter_view,
-                parent,
-                false
-            )
-        )
+        return FilterView(LayoutInflater.from(parent.context).inflate(R.layout.filter_view, parent, false))
     }
 
     override fun getItemCount(): Int = list.size
@@ -33,12 +28,12 @@ class FilterAdapter(val list: List<Genre>, val onClickListaner: OnClickListener)
             holder.itemView.text_filter.visibility = View.VISIBLE
             holder.itemView.filter_img.visibility = View.GONE
             holder.itemView.text_filter.text = list[position].name.capitalize()
-
         }
 
+        holder.itemView.card_filter.setCardBackgroundColor(context.resources.getColor(R.color.strange))
         holder.itemView.fr.setOnClickListener {
             if (position == 0) {
-
+                filterId = -1
             } else {
                 filterId = list[position].id
             }

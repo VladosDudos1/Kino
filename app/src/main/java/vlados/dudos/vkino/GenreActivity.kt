@@ -29,17 +29,17 @@ class GenreActivity : AppCompatActivity(), GenreAdapter.OnClickListener {
         rv.layoutManager = GridLayoutManager(this, 3)
         ViewAnimator().animateFadeIn(sc_view, 600, true, false)
 
-        val disp = App.dm.api
-            .getGenre()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({g ->
-                pb_g.visibility = View.GONE
-                rv.visibility = View.VISIBLE
-                rv.adapter =
-                    GenreAdapter(g.genres, this)
-            },{
-                Toast.makeText(this, "You have no internet!", Toast.LENGTH_SHORT).show()
-            })
+//        val disp = App.dm.api
+//            .getGenre()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({g ->
+//                pb_g.visibility = View.GONE
+//                rv.visibility = View.VISIBLE
+//                rv.adapter =
+//                    GenreAdapter(g.genres, this)
+//            },{
+//                Toast.makeText(this, "You have no internet!", Toast.LENGTH_SHORT).show()
+//            })
     }
 }

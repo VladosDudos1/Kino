@@ -20,4 +20,10 @@ class DataManager {
     fun endFirstLaunch(): Boolean = shared.edit().putBoolean("isFirstLaunch", false).commit()
 
     fun logout(): Boolean = shared.edit().putBoolean("isFirstLaunch", true).commit()
+
+    fun isDayMode(): Boolean = shared.getBoolean("NightMode", true)
+
+    fun toDayMode() = shared.edit().putBoolean("NightMode", false).commit()
+
+    fun toNightMode() = shared.edit().putBoolean("NightMode", true).commit()
 }

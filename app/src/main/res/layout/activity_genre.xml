@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
+    android:background="@color/init_bg"
+    android:scrollbars="none"
     tools:context=".GenreActivity">
 
     <LinearLayout
         android:id="@+id/sc_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/fColor"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
 
@@ -26,7 +24,7 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="Выбирите ваши любимые жанры"
-            android:textColor="@color/white"
+            android:textColor="@color/allTimeWhite"
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -46,7 +44,7 @@
             android:layout_height="96dp"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:indeterminateTint="@color/white" />
+            android:indeterminateTint="@color/allTimeWhite" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -56,6 +54,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="28dp"
+            android:textColor="@color/allTimeWhite"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/bluePirple"
             android:text="Подтвердить"
@@ -65,9 +64,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/purple" />
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 
 </ScrollView>

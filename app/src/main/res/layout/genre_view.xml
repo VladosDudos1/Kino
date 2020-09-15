@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/fColor">
+    android:background="@color/init_bg">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,9 +19,10 @@
             app:cornerRadius="64dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:backgroundTint="@color/purple"
+            android:backgroundTint="@color/fColor"
             android:text="Жанры"
             android:maxLines="1"
+            android:textColor="@color/allTimeWhite"
             android:ellipsize="end"
             android:textSize="12sp"/>
 

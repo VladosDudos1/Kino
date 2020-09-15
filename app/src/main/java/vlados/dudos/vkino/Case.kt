@@ -10,10 +10,18 @@ object Case {
     var id: Int? = null
 
     var filterId: Int ?= null
-    val filterList = mutableListOf<Result>()
+    var filterList = mutableListOf<Result>()
 
     val googleKey = "AIzaSyC0nAQI3hBdEAGoRz5mNfNy3FaKL77bdiE"
     var key = ""
 
     var userToken = ""
+
+    var showShimmer = true
+
+    var castItem: Cast ?= null
+
+    var bodyElement: RateBodyModel = RateBodyModel(0.0)
+
+    var rate_item: Result? = null
 }

@@ -2,7 +2,6 @@ package vlados.dudos.vkino
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -23,10 +22,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
-        google_btn.setOnClickListener{
+        google_btn.setOnClickListener {
             autorise()
         }
-        mail_btn.setOnClickListener(this::genreopen)
+        mail_btn.setOnClickListener(this::registr)
 
         ViewAnimator().animateFadeIn(linear, 600, true, true)
 
@@ -38,53 +37,61 @@ class LoginActivity : AppCompatActivity() {
             autorise()
         }
 
-        to_Registration.setOnClickListener(this::genreopen)
+        to_Registration.setOnClickListener(this::registr)
 
         auth_done.setOnClickListener {
-            var user = User(mail.text.toString(), "", "", password.text.toString())
+            if (mail.text.toString().isEmpty() || !mail.text.toString()
+                    .contains("@") || mail.text.toString().length <= 3
+            ) {
+                Toast.makeText(this, "Неправильно введён email", Toast.LENGTH_SHORT).show()
+            } else if (password.text.toString().isEmpty() || password.text.toString().equals(" ")) {
+                Toast.makeText(this, "Введите пароль", Toast.LENGTH_SHORT).show()
+            } else {
+                var user = User(mail.text.toString(), "", "", password.text.toString())
 
-            val sharedPreferences= getSharedPreferences("user", Context.MODE_PRIVATE)
-            val gson = Gson()
-            val json = gson.toJson(user)
+                val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
+                val gson = Gson()
+                val json = gson.toJson(user)
 
-            sharedPreferences.edit().putString("user", json).apply()
+                sharedPreferences.edit().putString("user", json).apply()
 
-            val sharedPreferencesToken = getSharedPreferences("token", Context.MODE_PRIVATE)
+                val sharedPreferencesToken = getSharedPreferences("token", Context.MODE_PRIVATE)
 
-            val disp = App.dm.apiReg
-                .autorisation(user)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ t ->
-                    userToken = t.token.toString()
-                    sharedPreferencesToken.edit().putString("token", t.token.toString()).apply()
-                }, {
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                }, {
-                    if (userToken.isEmpty()) {
-                        Toast.makeText(this, "Такого пользователя не существует", Toast.LENGTH_SHORT).show()
-                    } else {
-                        App.dm.endFirstLaunch()
-                        startActivity(Intent(this, ListMovieActivity::class.java))
-                    }
-                })
+                val disp = App.dm.apiReg
+                    .autorisation(user)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ t ->
+                        userToken = t.token.toString()
+                        sharedPreferencesToken.edit().putString("token", t.token.toString()).apply()
+                    }, {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }, {
+                        if (userToken.isEmpty()) {
+                            Toast.makeText(
+                                this,
+                                "Такого пользователя не существует",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            App.dm.endFirstLaunch()
+                            startActivity(Intent(this, ListMovieActivity::class.java))
+                        }
+                    })
+            }
         }
     }
 
     fun autorise() {
-        img_reg.visibility = View.GONE
-        view_move.visibility = View.GONE
-        layout_firstLaunch.visibility = View.GONE
+        layout.visibility = View.GONE
         layout_registration.visibility = View.GONE
         layout_autorisation.visibility = View.VISIBLE
         done_btn.visibility = View.GONE
     }
 
 
-    fun genreopen(view: View) {
-        view_move.visibility = View.GONE
-        img_reg.visibility = View.GONE
-        layout_firstLaunch.visibility = View.GONE
+    fun registr(view: View) {
+        layout.visibility = View.GONE
         layout_registration.visibility = View.VISIBLE
         layout_autorisation.visibility = View.GONE
         done_btn.visibility = View.VISIBLE

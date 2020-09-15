@@ -10,7 +10,7 @@ import vlados.dudos.vkino.Case
 import vlados.dudos.vkino.R
 import vlados.dudos.vkino.models.Result
 
-class SearchAdapter(val list: List<Result>, val onClickListener: OnClickListener): RecyclerView.Adapter<SearchAdapter.SearchView>(){
+class SearchAdapter(val list: List<Result>, val onClickListener: MovieAdapter.OnClickListener): RecyclerView.Adapter<SearchAdapter.SearchView>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchView {
         return SearchView(
@@ -28,7 +28,7 @@ class SearchAdapter(val list: List<Result>, val onClickListener: OnClickListener
             .into(holder.itemView.img_movie)
 
         holder.itemView.movie_card.setOnClickListener {
-            onClickListener.click(list[position])
+            onClickListener.clickM(list[position])
             Case.item = list[position]
             Case.id = list[position].id
         }
@@ -37,8 +37,4 @@ class SearchAdapter(val list: List<Result>, val onClickListener: OnClickListener
     }
 
     class SearchView(view: View): RecyclerView.ViewHolder(view)
-
-    interface OnClickListener {
-        fun click(data: Result)
-    }
 }

@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.finishAffinity
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -12,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import vlados.dudos.vkino.Case.userToken
 import vlados.dudos.vkino.app.App
 import vlados.dudos.vkino.models.User
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +23,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (App.dm.isDayMode()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         btn_in.setOnClickListener {
             if (App.dm.isFirstLaunch()) {
                 startActivity(Intent(this, GenreActivity::class.java))
-
             } else {
                 val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
                 val gson = Gson()
@@ -55,3 +62,4 @@ class MainActivity : AppCompatActivity() {
         finishAffinity()
     }
 }
+

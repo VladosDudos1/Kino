@@ -33,14 +33,14 @@
 
         <TextView
             android:id="@+id/name_movie"
-            android:layout_width="164dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left|bottom"
             android:layout_marginStart="28dp"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Бэтмен"
-            android:textColor="@color/white"
+            android:textColor="@color/allTimeWhite"
             android:layout_marginBottom="8dp"
             android:textSize="20sp" />
 
